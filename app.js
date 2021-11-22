@@ -11,11 +11,13 @@ app.use(express.json())
 
 const usuarios = require("./rutas/usuarios")
 const proyectos = require("./rutas/proyectos")
+const avances = require("./rutas/avances")
 app.use(usuarios)
 app.use(proyectos)
+app.use(avances)
 
 app.get("/",(req,res)=>{
-res.send("hola andrés  : )")
+res.send("hola este es el backend de InsertName  🐱‍👤 http://www.algo.com")
 })
 
 app.listen(3000 ,()=>{

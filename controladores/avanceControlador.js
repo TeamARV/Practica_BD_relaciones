@@ -2,24 +2,24 @@
 
 
 
-const Proyecto = require("../modelos/Proyecto.js")
+const Avance = require("../modelos/Avance.js")
 
 
 
 // Para Jalar los datos
 module.exports.Obtener = (req,res) => {
 
-    Proyecto.find({}, (error, respuesta) =>{
+    Avance.find({}, (error, respuesta) =>{
         if (error) 
         {
             return res.status(500).json({
-                message: "error mostrando Proyecto"
+                message: "error mostrando Avance"
             })
         }
             res.json(respuesta),
             console.log("se trajo esto de la BD :D --> " , respuesta)
 
-    }).populate("lider").populate("inscritos")
+    }).populate("proyecto")
 
 } 
 
@@ -27,12 +27,12 @@ module.exports.Obtener = (req,res) => {
 module.exports.Nuevo = (req,res) =>{
     console.log(req.body)
     
-    Proyecto.create(req.body ,(error,respuesta)=>{
+    Avance.create(req.body ,(error,respuesta)=>{
         
         if (error) 
         {
             return res.status(500).json({
-                message: "error creando Proyecto"
+                message: "error creando Avance"
             })
         }
             
@@ -47,35 +47,22 @@ module.exports.Nuevo = (req,res) =>{
 
 module.exports.Editar =  (req,res) =>{
 
-    const nombre = req.body.nombre
-    const presupuesto = req.body.presupuesto
-    const objetivosGenerales = req.body.objetivosGenerales
-    const objetivosEspecificos = req.body.objetivosEspecificos
-    const fechaInicio = req.body.fechaInicio
-    const fechaFin = req.body.fechaFin
-    const estado = req.body.estado
-    const faseProyecto = req.body.faseProyecto
-    const inscritos = req.body.inscritos
-    const avances = req.body.avances
-    const lider = req.body.lider           
+    const proyecto = req.body.proyecto
+    const fechaAvance = req.body.fechaAvance
+    const descripcion = req.body.descripcion
+    const observacionesLider = req.body.observacionesLider
+          
 
-       Proyecto.findByIdAndUpdate(req.body._id,{
-        nombre,    
-        presupuesto, 
-        objetivosGenerales, 
-        objetivosEspecificos, 
-        fechaInicio, 
-        fechaFin,
-        estado, 
-        faseProyecto, 
-        inscritos, 
-        avances, 
-        lider,
+        Avance.findByIdAndUpdate(req.body._id,{
+        proyecto,    
+        fechaAvance, 
+        descripcion, 
+        observacionesLider
     }, (error,respuesta)=>{
         if (error) 
         {
             return res.status(500).json({
-                message: "error editando Proyecto"
+                message: "error editando Avance"
             })
         }
             
@@ -90,11 +77,11 @@ module.exports.Editar =  (req,res) =>{
 // Para deletearlo para siempre :(
 module.exports.Eliminar = (req,res) =>{
 
-    Proyecto.findByIdAndDelete(req.body._id,(error,respuesta)=>{
+    Avance.findByIdAndDelete(req.body._id,(error,respuesta)=>{
         if (error) 
         {
             return res.status(500).json({
-                message: "error eliminando Proyecto"
+                message: "error eliminando Avance"
             })
         }
             
