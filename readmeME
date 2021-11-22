@@ -1,7 +1,20 @@
+
+
+notas de dependencias que use para esta api:
+
 yarn init
 yarn add express
 yarn add mongoose
-
 npm install -g nodemon # or using yarn: yarn global add nodemon
-
 yarn add dotenv
+
+///////////
+migration 
+
+yarn add graphql
+yarn add apollo-server-express
+yarn add cors
+
+///https://www.npmjs.com/package/apollo-server
+
+

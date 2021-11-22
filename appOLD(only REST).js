@@ -3,32 +3,8 @@
 const express = require("express")
 const app = express()
 const conexion = require("./db")
-////////////////imports sacados de documentacion npm
-var cors = require('cors')
-app.use(cors())
-const { ApolloServer, gql } = require('apollo-server-express');
-///////////////////////////
-// The GraphQL schema
-const typeDefs = gql`
-  type Query {
-    "A simple type for getting started!"
-    hello: String
-  }
-`;
 
-// A map of functions which return data for the schema.
-const resolvers = {
-  Query: {
-    hello: () => 'world',
-  },
-};
 
-///////defino server apollo
-const server = new ApolloServer({
-    typeDefs,
-    resolvers,
-  });
-//////////
 
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
@@ -47,8 +23,6 @@ app.get("/",(req,res)=>{
 res.send(" <h1><a href=\'http://localhost:3000/usuarios\'> Hola este es el backend de Insert Name 🐱‍👤</a></h1>")
 })
 
-app.listen(3000 , async ()=>{
+app.listen(3000 ,()=>{
 console.log("BackEnd Insert Name working in 🖥️ -> http://localhost:3000")
-await server.start()
-await server.applyMiddleware({app})
 })
