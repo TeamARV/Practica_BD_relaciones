@@ -35,7 +35,7 @@ const avances = require("./rutas/avances")
 const inscripciones = require("./rutas/inscripciones")
 // ruta raiz bienvenida  
 app.get("/",(req,res)=>{
-  res.send(" <h1><a href=\'http://localhost:3000/usuarios\'> Hola este es el backend Tipo REST de Insert Name 🐱‍👤</a> </br> <a href=\'http://localhost:3000/graphql\'> Hola este es el backend Tipo GraphQL de Insert Name 🐱‍👤</a> </h1>")
+  res.send(" <h1><a href=\'https://pruebaborrar939.herokuapp.com/usuarios\'> Hola este es el backend Tipo REST de Insert Name 🐱‍👤</a> </br> <a href=\'https://pruebaborrar939.herokuapp.com/graphql\'> Hola este es el backend Tipo GraphQL de Insert Name 🐱‍👤</a> </h1>")
   })
 //////////middleware////////////////////////////////////
 app.use(express.urlencoded({extended:true}))
@@ -48,8 +48,8 @@ app.use(usuarios , proyectos , avances , inscripciones)
 
 
 app.listen({port:process.env.PORT || 3000} , async ()=>{
-console.log("BackEnd Tipo REST Insert Name working in 🖥️ -> http://localhost:3000")
-console.log("BackEnd Tipo GraphQL Insert Name working in 🕸️ -> http://localhost:3000/graphql")
+console.log("BackEnd Tipo REST Insert Name working in 🖥️ -> https://pruebaborrar939.herokuapp.com")
+console.log("BackEnd Tipo GraphQL Insert Name working in 🕸️ -> https://pruebaborrar939.herokuapp.com/graphql")
 await server.start()
 await server.applyMiddleware({app})
 })
