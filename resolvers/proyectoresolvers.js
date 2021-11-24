@@ -1,7 +1,15 @@
+const Proyecto = require("../modelos/Proyecto.js")
+
+
 
 
 module.exports.proyectoresolvers = {
     Query: {
-      proyecto: () => 'hola desde proyecto',
+      testp: () => 'hola desde proyecto',
+      Proyectos: async (parent, args) => {
+        const proyectos = await Proyecto.find().populate("inscritos").populate("lider");
+        return proyectos;
+      },
+      
     },
   };
