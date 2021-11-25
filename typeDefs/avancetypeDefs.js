@@ -13,7 +13,34 @@ type Avance{
 type Query {
   "A simple type for getting started!"
   testA: String
-  Avances: [Avance]
+  Avances(_id:ID): [Avance]
 }
+
+
+type Mutation{
+
+crearAvance(
+  proyecto:String,
+    fechaAvance: String,
+    descripcion: String,
+    observacionesLider: String,
+
+):Avance
+
+editarAvance(
+    _id:ID!,
+    proyecto:String,
+    fechaAvance: String,
+    descripcion: String,
+    observacionesLider: String,
+
+):Avance
+
+eliminarAvance(
+  _id:ID!
+):Avance
+
+}
+
 `;
 

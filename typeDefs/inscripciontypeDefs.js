@@ -14,7 +14,37 @@ type Inscripcion{
 type Query {
   "A simple type for getting started!"
   testi: String
-  Inscripciones: [Inscripcion]
+  Inscripciones(_id:ID): [Inscripcion]
 }
+
+type Mutation{
+
+crearInscripcion(
+    proyecto:String,
+    estudiante: String,
+    estado: String,
+    fechaIngreso: String,
+    fechaEgreso: String 
+
+):Inscripcion
+
+editarInscripcion(
+    _id:ID!,
+    proyecto:String,
+    estudiante: String,
+    estado: String,
+    fechaIngreso: String,
+    fechaEgreso: String 
+
+):Inscripcion
+
+eliminarInscripcion(
+  _id:ID!
+):Inscripcion
+
+}
+
+
+
 `;
 
