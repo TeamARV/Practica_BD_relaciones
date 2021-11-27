@@ -18,3 +18,11 @@ yarn add cors
 ///https://www.npmjs.com/package/apollo-server
 
 
+// bcrypt  libreria para ecriptar
+yarn add bcrypt
+https://www.npmjs.com/package/bcrypt
+
+// para token 
+
+https://www.npmjs.com/package/jsonwebtoken
+

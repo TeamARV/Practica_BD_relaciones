@@ -1,4 +1,8 @@
 const Usuario = require("../modelos/Usuario.js")
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+const {TokenGenerado} = require("../tokens/tokenGen.js")
+
 
 module.exports.usuarioresolvers = {
  
@@ -21,15 +25,44 @@ module.exports.usuarioresolvers = {
     Mutation: {
 
       crearUsuario: async (parents,args) => {
+        const salt = await bcrypt.genSalt(saltRounds)
+        const cifrado = await bcrypt.hash( args.clave, salt)
          const usuariocreado =  await Usuario.create({
           correo : args.correo,
           identificacion : args.identificacion,
           nombreCompleto : args.nombreCompleto,
-          clave : args.clave,
+          clave : cifrado,
           tipoUsuario : args.tipoUsuario,
           estado : args.estado,
          })
-         return usuariocreado},
+         return usuariocreado
+        },
+
+
+        crearRegistro: async (parents,args) => {
+          const salt = await bcrypt.genSalt(saltRounds)
+          const cifrado = await bcrypt.hash( args.clave, salt)
+           const usuariocreado =  await Usuario.create({
+            correo : args.correo,
+            identificacion : args.identificacion,
+            nombreCompleto : args.nombreCompleto,
+            clave : cifrado,
+            tipoUsuario : args.tipoUsuario,
+            estado : args.estado,
+           })
+           return {token: TokenGenerado({
+
+            _id: usuariocreado._id,
+            correo : usuariocreado.correo,
+            identificacion : usuariocreado.identificacion,
+            nombreCompleto : usuariocreado.nombreCompleto,
+            /* clave : usuariocreado.clave, */
+            tipoUsuario : usuariocreado.tipoUsuario,
+            estado : usuariocreado.estado,
+
+           })
+          }
+          },
 
 
          editarUsuario: async (parent, args) => {
