@@ -38,6 +38,36 @@ module.exports.usuarioresolvers = {
          return usuariocreado
         },
 
+        login: async (parents,args) => {
+
+           const searchUser = await Usuario.findOne({correo:args.correo})
+           const validate = await bcrypt.compare(args.clave, searchUser.clave )
+           if(validate===true){
+
+            console.log(validate)
+           return{ token:  TokenGenerado({
+
+            _id: searchUser._id,
+            correo : searchUser.correo,
+            identificacion : searchUser.identificacion,
+            nombreCompleto : searchUser.nombreCompleto,
+            tipoUsuario : searchUser.tipoUsuario,
+            estado : searchUser.estado,
+
+           })}
+ 
+           }
+    
+          },
+
+
+          testToken: async (parents,args,context) => {
+
+            console.log("el context", context)
+
+     
+           },
+
 
         crearRegistro: async (parents,args) => {
           const salt = await bcrypt.genSalt(saltRounds)

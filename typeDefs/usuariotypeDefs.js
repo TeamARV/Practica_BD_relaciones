@@ -44,6 +44,13 @@ type Mutation{
   
   ):Token
 
+  login(
+    correo: String!
+    clave: String!
+  ):Token
+
+  testToken:Token
+
   editarUsuario(
     _id:ID!
     correo: String

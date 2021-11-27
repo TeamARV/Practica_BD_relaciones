@@ -8,4 +8,15 @@ const TokenGenerado = (payload) =>{
 }
 
 
-module.exports = {TokenGenerado} 
+const TokenValidator = (token) =>{
+   if(token){
+      const validator = jwt.verify(token,'shhhhh',(err,data)=>{
+         if(data){return {data:data,}}
+         if(err){return {error:err,}}
+      } )
+      return validator
+   }
+   }
+   
+ 
+ module.exports = {TokenGenerado , TokenValidator} 

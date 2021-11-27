@@ -1,5 +1,6 @@
 /* import express from "express"; */  //nueva notacion ES6
 const { ApolloServer } = require('apollo-server-express');
+const {TokenValidator} = require("./tokens/tokenGen.js")
 const dotenv = require('dotenv').config()
 const express = require("express")
 const conexion = require("./db")
@@ -23,9 +24,26 @@ const {avancetypeDefs} = require("./typeDefs/avancetypeDefs")
 const {avanceresolvers} = require("./resolvers/avanceresolvers") 
 
 /////////defino server apollo con los cosos de graphql
+const getUserData =(token) =>{
+ 
+  const verificacion = TokenValidator(token.split(' ')[1]) // para quitar la palabra barrer y poder meter el token limpio
+  if(verificacion.data){return verificacion.data} 
+  else{return null}
+}
+
 const server = new ApolloServer({                         
     typeDefs:[usuariotypeDefs , proyectotypeDefs, inscripciontypeDefs, avancetypeDefs],
-    resolvers:[usuarioresolvers , proyectoresolvers, inscripcionresolvers, avanceresolvers]
+    resolvers:[usuarioresolvers , proyectoresolvers, inscripcionresolvers, avanceresolvers],
+    context: ({ req }) => {
+      const token = req.headers?.authorization ?? null;
+      if (token) {
+        const userData = getUserData(token);
+        if (userData) {
+          return { userData };
+        }
+      }
+      return null;
+    },
   });
 
 ///////// rutas :D//////////////////////////////////////
