@@ -13,7 +13,7 @@ module.exports.usuarioresolvers = {
         if (Object.keys(args).includes('_id')) {
         const usuarios = await Usuario.find({_id:args._id});
         return usuarios;}
-        else{const usuarios = await Usuario.find();
+        else{const usuarios = await Usuario.find() ;
         return usuarios;}
       },
       
