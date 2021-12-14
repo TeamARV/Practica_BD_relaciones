@@ -45,6 +45,7 @@ type Query {
   "A simple type for getting started!"
   testp: String
   Proyectos(_id:ID): [Proyecto]
+  ProyectosLite(filtro:ID): [Proyecto]
 }
 
 type Mutation{
@@ -78,6 +79,17 @@ editarProyecto(
     avances: [ID],         
     lider: ID
 
+):Proyecto
+
+
+editarProyectoINSC(
+    _id:ID!,
+    inscritos: [String],        
+):Proyecto
+
+editarProyectoAVAN(
+    _id:ID!,
+    avances: [ID],        
 ):Proyecto
 
 eliminarProyecto(

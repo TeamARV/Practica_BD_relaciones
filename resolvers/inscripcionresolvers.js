@@ -32,7 +32,7 @@ module.exports.inscripcionresolvers = {
           estudiante: args.estudiante,
           estado: args.estado,
           fechaIngreso: args.fechaIngreso,
-          fechaEngreso: args.fechaEngreso
+          fechaEgreso: args.fechaEgreso
     
          })
          return inscripcioncreado},
@@ -46,15 +46,16 @@ module.exports.inscripcionresolvers = {
           estudiante: args.estudiante,
           estado: args.estado,
           fechaIngreso: args.fechaIngreso,
-          fechaEngreso: args.fechaEngreso
+          fechaEgreso: args.fechaEgreso
             },
             { new: true }
           );
     
-          return proyectoEditado;},   
+          return inscripcionEditado;},   
 
           eliminarInscripcion: async (parent, args) => {
-              const inscripcionDeleteado = await Inscripcion.findOneAndDelete({ _id: args._id });
+              const inscripcionDeleteado = await Inscripcion.findOneAndDelete({ _id: args._id },
+                { new: true });
               return inscripcionDeleteado;},
         
     },

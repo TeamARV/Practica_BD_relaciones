@@ -16,7 +16,22 @@ module.exports.proyectoresolvers = {
         return proyectos;}
       },
 
+
+      ProyectosLite: async (parent, args) => {
+        if (Object.keys(args).includes('filtro')) {
+        const proyectos = await Proyecto.find({inscritos:args.filtro}).populate("lider").populate("inscritos").populate("avances") ;
+        return proyectos;}
+        else{const proyectos = await Proyecto.find().populate("lider").populate("inscritos").populate("avances") ;
+        return proyectos;}
+      },
+
+
+
+
     },
+
+
+    
 
     Mutation: {
 
@@ -57,6 +72,35 @@ module.exports.proyectoresolvers = {
           );
     
           return proyectoEditado;},
+
+          editarProyectoINSC: async (parent, args) => {
+            const proyectoEditado = await Proyecto.findByIdAndUpdate(args._id,{
+              $addToSet:{
+                inscritos:[args.inscritos]     
+                }
+
+              },
+                      
+              { new: true }
+            );
+      
+            return proyectoEditado;},
+
+            editarProyectoAVAN: async (parent, args) => {
+              const proyectoEditado = await Proyecto.findByIdAndUpdate(args._id,{
+                $addToSet:{
+                  avances:[args.avances]     
+                  }
+  
+                },
+                        
+                { new: true }
+              );
+        
+              return proyectoEditado;},
+
+
+
 
           eliminarProyecto: async (parent, args) => {
               const proyectoDeleteado = await Proyecto.findOneAndDelete({ _id: args._id });
