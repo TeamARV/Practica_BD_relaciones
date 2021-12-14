@@ -36,3 +36,9 @@ userSchema.virtual('proyectosLiderados', {
   localField: '_id',
   foreignField: 'lider',
 });
+
+docker build -t backciclo4 .
+
+
+
+docker run -it -p 3000:3000 backciclo4
